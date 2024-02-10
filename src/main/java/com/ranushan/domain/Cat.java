@@ -10,10 +10,10 @@ import lombok.Setter;
 @Entity
 public class Cat {
     @Id
-    private String id;
-    private String url;
-    private Integer votes;
+    private String id; // Unique Identification
+    private String url; // Url for cat image
+    private Integer votes; // Number of votes
 
-    // for JPA only, no use
+    // For JPA only, no use
     public Cat() {}
 }

@@ -11,7 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CatDao extends JpaRepository<Cat, String> {
 
-    // Custom query
+    /**
+     * Connecting to the Database
+     * Custom query => Update votes by ID
+     * @param id Identification for cat picture
+     */
     @Transactional
     @Modifying
     @Query("UPDATE Cat c SET c.votes = c.votes + 1 WHERE c.id = :id")

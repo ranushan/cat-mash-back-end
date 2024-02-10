@@ -11,6 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CatServiceImpl implements CatService {
 
+    // Dependency Injecting (DI) => Cat Dao (Data Layer)
     private final CatDao catDao;
 
     @Override

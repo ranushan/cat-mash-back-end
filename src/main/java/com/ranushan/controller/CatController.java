@@ -13,13 +13,22 @@ import java.util.List;
 @RequestMapping("/api")
 public class CatController {
 
+    // Dependency Injection (DI) => Cat Service (Business Layer)
     private final CatService catService;
 
+    /**
+     * Get All Cat picture from Database
+     * @return List of Cat (id, url, votes)
+     */
     @GetMapping("cats")
     public List<Cat> getAllCatPictures() {
         return catService.getAllCatPictures();
     }
 
+    /**
+     * Voting for your favorite cat => Update Cat model
+     * @param id Identification Cat Picture
+     */
     @PostMapping("cats")
     public void voteCatPicture(@RequestBody String id) {
         catService.voteCatPicture(id);
