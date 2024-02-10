@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource: ## PostgreSQL
+    platform: postgresql
+    url: jdbc:postgresql://dpg-cn35c4vqd2ns73ef42lg-a.oregon-postgres.render.com/demo_t94u
+    username: demo_t94u_user
+    password: 4whm5j5rrsFUcRxFznxjqJYHYoCP0k7I
+    driver-class-name: org.postgresql.Driver
+  hikari: ## default connection pool
+    connectionTimeout: 20000
+    maximumPoolSize: 5
+  jpa:
+    show-sql: true # remove
+    hibernate: # set none in production otherwise create-drop
+      ddl-auto: create-drop # remove
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true # remove
