@@ -68,7 +68,9 @@ public class CatServiceImpl implements CatService {
         var newCats = cats.stream()
                 .filter(c -> allCatPictures.stream().noneMatch(alp -> c.getId().equals(alp.getId())))
                 .collect(Collectors.toList());
-        newCats.forEach(c -> c.setVotes(0));
-        catDao.saveAll(newCats);
+        if(!newCats.isEmpty()) {
+            newCats.forEach(c -> c.setVotes(0));
+            catDao.saveAll(newCats);
+        }
     }
 }
