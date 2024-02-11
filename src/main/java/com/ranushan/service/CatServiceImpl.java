@@ -27,6 +27,10 @@ public class CatServiceImpl implements CatService {
     private final RestTemplate restTemplate;
     private final ObjectMapper mapper;
 
+    // URL API Atelier to get all cats
+    private static final String URL = "https://data.latelier.co/cats.json";
+    private static final String ROOT_NAME = "images";
+
     /**
      * Save All Cats when you start an instance of this application (during loading Spring context)
      */
@@ -51,9 +55,9 @@ public class CatServiceImpl implements CatService {
     private void saveAllCats() {
         log.info("==========> START CALL API Atelier ==========");
         var json = restTemplate
-                .getForEntity("https://data.latelier.co/cats.json", String.class)
+                .getForEntity(URL, String.class)
                 .getBody();
-        var reader = mapper.reader().withRootName("images").forType(new TypeReference<List<Cat>>(){});
+        var reader = mapper.reader().withRootName(ROOT_NAME).forType(new TypeReference<List<Cat>>(){});
         try {
             List<Cat> cats = reader.readValue(json);
             checkIfCatIsPresent(cats);
@@ -68,6 +72,7 @@ public class CatServiceImpl implements CatService {
         var newCats = cats.stream()
                 .filter(c -> allCatPictures.stream().noneMatch(alp -> c.getId().equals(alp.getId())))
                 .collect(Collectors.toList());
+        log.info("========== SHOULD ADDING {} element{} <==========", newCats.size(), newCats.size() > 1 ? "s" : "");
         if(!newCats.isEmpty()) {
             newCats.forEach(c -> c.setVotes(0));
             catDao.saveAll(newCats);
