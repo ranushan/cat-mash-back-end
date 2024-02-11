@@ -13,7 +13,7 @@ spring:
     maximumPoolSize: 5
   jpa:
     hibernate: # set none in production otherwise create-drop
-      ddl-auto: create-drop # remove
+      ddl-auto: none # remove create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
